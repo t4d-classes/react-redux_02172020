@@ -1,4 +1,6 @@
-# Assessment
+# React Assessment
+
+Because we have some people in the class with React experience this assessment to help me know how fast and advanced we can go from the start of the class. This is no pressure thing. Its ok if you cannot complete it.
 
 1. Create a Hobby Tool which manages a list of hobbies. The tool should have a header titled "Hobby Tool". The tool should display a list of strings which will be a list of hobbies such as "running", "knitting", "chess". 
 
