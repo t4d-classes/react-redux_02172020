@@ -1,5 +1,7 @@
 # Exercise 1
 
+GitHub: https://github.com/t4d-classes/react-redux_02172020
+
 1. Create a new component named Car Tool in the `components` folder.
 
 2. In the Car Tool component display the following HTML content:
