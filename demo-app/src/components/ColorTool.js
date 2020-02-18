@@ -14,7 +14,6 @@ export const ColorTool = (props) => {
   const change = (e) => {
     setColorForm({
       ...colorForm,
-      // colorName: e.target.value,
       [ e.target.name ]: e.target.value,
     });
   };
