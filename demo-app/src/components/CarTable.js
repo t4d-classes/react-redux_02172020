@@ -11,8 +11,11 @@ export const CarTable = ({
   onSelectCar: selectCar,
   onToggleAllCars: toggleAllCars,
   onDeleteCar: deleteCar,
-  onBulkDeleteCars: bulkDeleteCars
+  onBulkDeleteCars: bulkDeleteCars,
+  CarEditRowComponent
 }) => {
+
+  const TheCarEditRow = CarEditRowComponent || CarEditRow;
 
   return (
     <>
@@ -35,7 +38,7 @@ export const CarTable = ({
         </thead>
         <tbody>
           {cars.map(car => car.id === editCarId
-            ? <CarEditRow key={car.id} car={car} />
+            ? <TheCarEditRow key={car.id} car={car} />
             : <CarViewRow key={car.id} car={car}
                 selected={selectedCarIds.includes(car.id)}
                 onSelectCar={selectCar} onDeleteCar={deleteCar}

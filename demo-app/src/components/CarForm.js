@@ -8,9 +8,9 @@ const getInitCarForm = () => ({
   price: 0,
 });
 
-export const CarForm = ({ onSubmitCar, buttonText }) => {
+export const CarForm = ({ onSubmitCar, buttonText, car }) => {
 
-  const [ carForm, setCarForm ] = useState(getInitCarForm());
+  const [ carForm, setCarForm ] = useState(car || getInitCarForm());
 
   const change = (e) => {
     setCarForm({

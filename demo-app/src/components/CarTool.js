@@ -4,6 +4,16 @@ import { ToolHeader } from './ToolHeader';
 import { CarTable } from './CarTable';
 import { CarForm } from './CarForm';
 
+const EditCarFormRow = (props) => {
+
+  return <tr>
+    <td colSpan="8">
+      <CarForm buttonText="Save" {...props} />
+    </td>
+  </tr>;
+
+}
+
 export const CarTool = (props) => {
 
   const [ cars, setCars ] = useState(props.cars.concat());
@@ -66,7 +76,8 @@ export const CarTool = (props) => {
       <CarTable cars={cars} selectedCarIds={selectedCarIds} editCarId={editCarId}
         onEditCar={setEditCarId} onSelectCar={selectCar} onDeleteCar={deleteCar}
         onBulkDeleteCars={bulkDeleteCars} onToggleAllCars={toggleAllCars}
-        onCancelCar={() => setEditCarId(-1)} />
+        onCancelCar={() => setEditCarId(-1)}
+        CarEditRowComponent={EditCarFormRow} />
       <CarForm buttonText="Add Car" onSubmitCar={addCar} />
     </>
   );
