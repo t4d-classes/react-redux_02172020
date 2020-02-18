@@ -7,6 +7,7 @@ import { CarForm } from './CarForm';
 export const CarTool = (props) => {
 
   const [ cars, setCars ] = useState(props.cars.concat());
+  const [ editCarId, setEditCarId ] = useState(-1);
 
   const [ selectedCarIds, setSelectedCarIds ] =
     useState([]);
@@ -19,6 +20,17 @@ export const CarTool = (props) => {
     } else {
       setSelectedCarIds(selectedCarIds.concat(carId));
     }
+
+  };
+
+  const toggleAllCars = () => {
+
+    if (cars.length === selectedCarIds.length) {
+      setSelectedCarIds([]);
+    } else {
+      setSelectedCarIds(cars.map(c => c.id));
+    }
+
 
   };
 
@@ -51,9 +63,10 @@ export const CarTool = (props) => {
   return (
     <>
       <ToolHeader headerText="Car Tool" />
-      <CarTable cars={cars} selectedCarIds={selectedCarIds}
-        onSelectCar={selectCar} onDeleteCar={deleteCar}
-        onBulkDeleteCars={bulkDeleteCars} />
+      <CarTable cars={cars} selectedCarIds={selectedCarIds} editCarId={editCarId}
+        onEditCar={setEditCarId} onSelectCar={selectCar} onDeleteCar={deleteCar}
+        onBulkDeleteCars={bulkDeleteCars} onToggleAllCars={toggleAllCars}
+        onCancelCar={() => setEditCarId(-1)} />
       <CarForm buttonText="Add Car" onSubmitCar={addCar} />
     </>
   );

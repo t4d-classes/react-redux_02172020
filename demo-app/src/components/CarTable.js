@@ -1,11 +1,15 @@
 import React from 'react';
 
 import { CarViewRow } from './CarViewRow';
+import { CarEditRow } from './CarEditRow';
 
 export const CarTable = ({
   cars,
+  editCarId,
   selectedCarIds,
+  onEditCar: editCar,
   onSelectCar: selectCar,
+  onToggleAllCars: toggleAllCars,
   onDeleteCar: deleteCar,
   onBulkDeleteCars: bulkDeleteCars
 }) => {
@@ -14,6 +18,8 @@ export const CarTable = ({
     <>
       <button type="button" onClick={bulkDeleteCars}>
         Bulk Delete</button>
+      <button type="button" onClick={toggleAllCars}>
+        Toggle All</button>
       <table>
         <thead>
           <tr>
@@ -28,9 +34,12 @@ export const CarTable = ({
           </tr>
         </thead>
         <tbody>
-          {cars.map(car => <CarViewRow key={car.id} car={car}
-            selected={selectedCarIds.includes(car.id)}
-            onSelectCar={selectCar} onDeleteCar={deleteCar} />)}
+          {cars.map(car => car.id === editCarId
+            ? <CarEditRow key={car.id} car={car} />
+            : <CarViewRow key={car.id} car={car}
+                selected={selectedCarIds.includes(car.id)}
+                onSelectCar={selectCar} onDeleteCar={deleteCar}
+                onEditCar={editCar} />)}
         </tbody>
       </table>
     </>
