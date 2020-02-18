@@ -8,6 +8,36 @@ export const CarTool = (props) => {
 
   const [ cars, setCars ] = useState(props.cars.concat());
 
+  const [ selectedCarIds, setSelectedCarIds ] =
+    useState([]);
+
+  const selectCar = (carId) => {
+
+    if (selectedCarIds.includes(carId)) {
+      setSelectedCarIds(
+        selectedCarIds.filter(id => id !== carId));
+    } else {
+      setSelectedCarIds(selectedCarIds.concat(carId));
+    }
+
+  };
+
+  const deleteCar = (carId) => {
+
+    setCars(cars.filter(c => c.id !== carId));
+    setSelectedCarIds(
+      selectedCarIds.filter(id => id !== carId));
+
+  };
+
+  const bulkDeleteCars = () => {
+
+    setCars(cars.filter(
+      c => !selectedCarIds.includes(c.id)));
+    setSelectedCarIds([]);
+
+  }
+
 
   const addCar = (car) => {
 
@@ -21,7 +51,9 @@ export const CarTool = (props) => {
   return (
     <>
       <ToolHeader headerText="Car Tool" />
-      <CarTable cars={cars} />
+      <CarTable cars={cars} selectedCarIds={selectedCarIds}
+        onSelectCar={selectCar} onDeleteCar={deleteCar}
+        onBulkDeleteCars={bulkDeleteCars} />
       <CarForm buttonText="Add Car" onSubmitCar={addCar} />
     </>
   );
