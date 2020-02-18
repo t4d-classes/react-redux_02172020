@@ -8,7 +8,7 @@ const getInitCarForm = () => ({
   price: 0,
 });
 
-export const CarForm = ({ onSubmitCar, buttonText, car }) => {
+export const CarForm = ({ onSubmitCar, buttonText, car, onCancelCar: cancelCar }) => {
 
   const [ carForm, setCarForm ] = useState(car || getInitCarForm());
 
@@ -58,9 +58,15 @@ export const CarForm = ({ onSubmitCar, buttonText, car }) => {
       <button type="button" onClick={submitCar}>
         {buttonText}
       </button>
+      {cancelCar && <button type="button" onClick={cancelCar}>
+        Cancel
+      </button>}
     </form>
   );
-
-
-
 };
+
+CarForm.defaultProps = {
+  buttonText: 'Submit Car',
+};
+
+console.dir(CarForm);

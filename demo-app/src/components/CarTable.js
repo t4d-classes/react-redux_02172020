@@ -2,20 +2,32 @@ import React from 'react';
 
 import { CarViewRow } from './CarViewRow';
 import { CarEditRow } from './CarEditRow';
+import { SortColHeader } from './SortColHeader';
 
 export const CarTable = ({
+  config,
   cars,
   editCarId,
   selectedCarIds,
   onEditCar: editCar,
   onSelectCar: selectCar,
   onToggleAllCars: toggleAllCars,
-  onDeleteCar: deleteCar,
+  onDeleteCar: deleteCar, 
   onBulkDeleteCars: bulkDeleteCars,
-  CarEditRowComponent
+  CarEditRowComponent,
+  onSaveCar: saveCar,
+  onCancelCar: cancelCar,
+  onSort: sort,
+  sortCol,
 }) => {
 
   const TheCarEditRow = CarEditRowComponent || CarEditRow;
+
+  const sortedCars = cars.concat().sort((a,b) => {
+
+    return a[sortCol] > b[sortCol] ? 1 : a[sortCol] < b[sortCol] ? -1 : 0;
+
+  });
 
   return (
     <>
@@ -27,18 +39,16 @@ export const CarTable = ({
         <thead>
           <tr>
             <th>Select</th>
-            <th>Id</th>
-            <th>Make</th>
-            <th>Model</th>
-            <th>Year</th>
-            <th>Color</th>
-            <th>Price</th>
+            {config.cols.map(col =>
+              <SortColHeader colName={col.name} onSort={sort}
+                sortCol={sortCol} headerText={col.header} />)}
             <th>Actions</th>
           </tr>
         </thead>
         <tbody>
-          {cars.map(car => car.id === editCarId
-            ? <TheCarEditRow key={car.id} car={car} />
+          {sortedCars.map(car => car.id === editCarId
+            ? <TheCarEditRow key={car.id} car={car}
+                onSaveCar={saveCar} onCancelCar={cancelCar} />
             : <CarViewRow key={car.id} car={car}
                 selected={selectedCarIds.includes(car.id)}
                 onSelectCar={selectCar} onDeleteCar={deleteCar}
