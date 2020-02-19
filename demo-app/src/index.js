@@ -23,14 +23,29 @@ const calcToolReducer = (state = { result: 0 }, action) => {
 };
 
 const createStore = (reducerFn) => {
+  let currentState = undefined;
+  const subscribers = [];
 
   return {
-    getState: () => {},
-    subscribe: () => {},
-    dispatch: () => {},
+    getState: () => currentState,
+    subscribe: (callbackFn) => {
+      subscribers.push(callbackFn);
+    },
+    dispatch: (action) => {
+      currentState = reducerFn(currentState, action);
+      subscribers.forEach(cb => cb());
+    },
   };
-
 };
+
+const calcToolStore = createStore(calcToolReducer);
+
+calcToolStore.subscribe(() => {
+  console.log(calcToolStore.getState());
+});
+
+calcToolStore.dispatch(createAddAction(1));
+calcToolStore.dispatch(createSubtractAction(2));
 
 // const actions = [
 //   createAddAction(1),
