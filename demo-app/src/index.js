@@ -7,7 +7,7 @@ const SUBTRACT_ACTION = '[CalcTool] SUBTRACT';
 const createAddAction = num => ({ type: ADD_ACTION, payload: { num }});
 const createSubtractAction = num => ({ type: SUBTRACT_ACTION, payload: { num }});
 
-const calcToolReducer = (state = { result: 0, history = [], }, action) => {
+const calcToolReducer = (state = { result: 0, history: [], }, action) => {
   console.log('state: ', state, 'action: ', action);
   switch(action.type) {
     case ADD_ACTION:
