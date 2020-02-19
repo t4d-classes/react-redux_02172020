@@ -1,3 +1,6 @@
+import React, { useState } from 'react';
+import ReactDOM from 'react-dom';
+
 const ADD_ACTION = '[CalcTool] ADD';
 const SUBTRACT_ACTION = '[CalcTool] SUBTRACT';
 
@@ -40,21 +43,47 @@ const createStore = (reducerFn) => {
 
 const calcToolStore = createStore(calcToolReducer);
 
+const CalcTool = ({ result, onAdd, onSubtract }) => {
+
+  const [ num, setNum ] = useState(0);
+
+  return <form>
+
+    <div>
+      Result: {result}
+    </div>
+
+    <div>
+      <label htmlFor="num-input">Num</label>
+      <input type="number" id="num-input" value={num}
+        onChange={e => setNum(Number(e.target.value))} />
+    </div>
+
+    <div>
+      <button type="button" onClick={() => onAdd(num)}>+</button>
+      <button type="button" onClick={() => onSubtract(num)}>-</button>
+    </div>
+
+  </form>
+
+};
+
+const add = num => calcToolStore.dispatch(createAddAction(num));
+const subtract = num => calcToolStore.dispatch(createSubtractAction(num));
+
 calcToolStore.subscribe(() => {
-  console.log(calcToolStore.getState());
+  ReactDOM.render(
+    <CalcTool result={calcToolStore.getState().result}
+      onAdd={add} onSubtract={subtract} />,
+    document.querySelector('#root'),
+  );
 });
 
-calcToolStore.dispatch(createAddAction(1));
-calcToolStore.dispatch(createSubtractAction(2));
+calcToolStore.dispatch(createAddAction(0));
 
-// const actions = [
-//   createAddAction(1),
-//   createSubtractAction(2),
-//   { type: ADD_ACTION, payload: { num: 3 } },
-//   { type: SUBTRACT_ACTION, payload: { num: 4 } },
-//   { type: ADD_ACTION, payload: { num: 5 } },
-// ];
+// ReactDOM.render(
+//   <CalcTool store={calcToolStore} />,
+//   document.querySelector('#root'),
+// );
 
-// const finalState = actions.reduce( , { result: 0 } );
 
-// console.log(finalState);
