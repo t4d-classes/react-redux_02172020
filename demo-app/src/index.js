@@ -11,13 +11,11 @@ const createSubtractAction = num => ({ type: SUBTRACT_ACTION, payload: { num }})
 const createClearAction = () => ({ type: CLEAR_ACTION });
 const createDeleteEntryAction = entryId => ({ type: DELETE_ENTRY_ACTION, payload: { entryId }});
 
-const calcToolReducer = (state = { result: 0, history: [], }, action) => {
-  console.log('state: ', state, 'action: ', action);
+const calcToolReducer = (state = { history: [], }, action) => {
   switch(action.type) {
     case ADD_ACTION:
       return {
         ...state,
-        result: state.result + action.payload.num,
         history: state.history.concat({
           id: Math.max(...state.history.map(e => e.id), 0) + 1,
           opName: action.type,
@@ -27,7 +25,6 @@ const calcToolReducer = (state = { result: 0, history: [], }, action) => {
     case SUBTRACT_ACTION:
       return {
         ...state,
-        result: state.result - action.payload.num,
         history: state.history.concat({
           id: Math.max(...state.history.map(e => e.id), 0) + 1,
           opName: action.type,
@@ -37,7 +34,6 @@ const calcToolReducer = (state = { result: 0, history: [], }, action) => {
     case CLEAR_ACTION:
       return {
         ...state,
-        result: 0,
         history: [],
       };
     case DELETE_ENTRY_ACTION:
@@ -50,21 +46,21 @@ const calcToolReducer = (state = { result: 0, history: [], }, action) => {
   }
 };
 
-const createStore = (reducerFn) => {
-  let currentState = undefined;
-  const subscribers = [];
+// const createStore = (reducerFn) => {
+//   let currentState = undefined;
+//   const subscribers = [];
 
-  return {
-    getState: () => currentState,
-    subscribe: (callbackFn) => {
-      subscribers.push(callbackFn);
-    },
-    dispatch: (action) => {
-      currentState = reducerFn(currentState, action);
-      subscribers.forEach(cb => cb());
-    },
-  };
-};
+//   return {
+//     getState: () => currentState,
+//     subscribe: (callbackFn) => {
+//       subscribers.push(callbackFn);
+//     },
+//     dispatch: (action) => {
+//       currentState = reducerFn(currentState, action);
+//       subscribers.forEach(cb => cb());
+//     },
+//   };
+// };
 
 const calcToolStore = createStore(calcToolReducer);
 
@@ -119,9 +115,27 @@ const subtract = num => calcToolStore.dispatch(createSubtractAction(num));
 const clear = () => calcToolStore.dispatch(createClearAction());
 const deleteEntry = (entryId) => calcToolStore.dispatch(createDeleteEntryAction(entryId));
 
+const calcResult = history => {
+
+  return history.reduce( (acc, entry) => { 
+
+    switch (entry.opName) {
+      case ADD_ACTION:
+        return acc + entry.opValue;
+      case SUBTRACT_ACTION:
+        return acc - entry.opValue;
+        default:
+        return acc;
+    }
+
+  }, 0);
+
+
+}
+
 calcToolStore.subscribe(() => {
   ReactDOM.render(
-    <CalcTool result={calcToolStore.getState().result}
+    <CalcTool result={calcResult(calcToolStore.getState().history)}
       history={calcToolStore.getState().history}
       onAdd={add} onSubtract={subtract} onClear={clear}
       onDeleteEntry={deleteEntry} />,
