@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
+import { createStore, bindActionCreators } from 'redux';
+import { Provider, useSelector, useDispatch } from 'react-redux';
 
 const ADD_ACTION = '[CalcTool] ADD';
 const SUBTRACT_ACTION = '[CalcTool] SUBTRACT';
@@ -110,10 +112,13 @@ const CalcTool = ({
 
 };
 
-const add = num => calcToolStore.dispatch(createAddAction(num));
-const subtract = num => calcToolStore.dispatch(createSubtractAction(num));
-const clear = () => calcToolStore.dispatch(createClearAction());
-const deleteEntry = (entryId) => calcToolStore.dispatch(createDeleteEntryAction(entryId));
+// const bindActionCreators = (actionMap, dispatchFn) => {
+//   return Object.keys(actionMap).reduce( (boundActionMap, actionKey) => {
+//     boundActionMap[actionKey] = (...params) =>
+//       dispatchFn(actionMap[actionKey](...params));
+//     return boundActionMap;
+//   }, {});
+// }
 
 const calcResult = history => {
 
@@ -130,17 +135,30 @@ const calcResult = history => {
 
   }, 0);
 
+};
 
-}
+const CalcToolContainer = () => {
 
-calcToolStore.subscribe(() => {
-  ReactDOM.render(
-    <CalcTool result={calcResult(calcToolStore.getState().history)}
-      history={calcToolStore.getState().history}
-      onAdd={add} onSubtract={subtract} onClear={clear}
-      onDeleteEntry={deleteEntry} />,
-    document.querySelector('#root'),
-  );
-});
+  const { add, subtract, clear, deleteEntry } = bindActionCreators({
+    add: createAddAction,
+    subtract: createSubtractAction,
+    clear: createClearAction,
+    deleteEntry: createDeleteEntryAction,
+  }, useDispatch());
 
-calcToolStore.dispatch(createAddAction(0));
+  const stateProps = useSelector(state => ({
+    result: calcResult(state.history),
+    history: state.history,
+  }));
+
+  return <CalcTool {...stateProps}
+    onAdd={add} onSubtract={subtract}
+    onClear={clear} onDeleteEntry={deleteEntry}/>;
+};
+
+ReactDOM.render(
+  <Provider store={calcToolStore}>
+    <CalcToolContainer />
+  </Provider>,
+  document.querySelector('#root'),
+)
