@@ -7,18 +7,20 @@ const SUBTRACT_ACTION = '[CalcTool] SUBTRACT';
 const createAddAction = num => ({ type: ADD_ACTION, payload: { num }});
 const createSubtractAction = num => ({ type: SUBTRACT_ACTION, payload: { num }});
 
-const calcToolReducer = (state = { result: 0 }, action) => {
+const calcToolReducer = (state = { result: 0, history = [], }, action) => {
   console.log('state: ', state, 'action: ', action);
   switch(action.type) {
     case ADD_ACTION:
       return {
         ...state,
         result: state.result + action.payload.num,
+        history: state.history.concat({ opName: action.type, opValue: action.payload.num }),
       };
     case SUBTRACT_ACTION:
       return {
         ...state,
         result: state.result - action.payload.num,
+        history: state.history.concat({ opName: action.type, opValue: action.payload.num }),
       };
     default:
       return state;
@@ -43,7 +45,7 @@ const createStore = (reducerFn) => {
 
 const calcToolStore = createStore(calcToolReducer);
 
-const CalcTool = ({ result, onAdd, onSubtract }) => {
+const CalcTool = ({ result, history, onAdd, onSubtract }) => {
 
   const [ num, setNum ] = useState(0);
 
@@ -64,6 +66,21 @@ const CalcTool = ({ result, onAdd, onSubtract }) => {
       <button type="button" onClick={() => onSubtract(num)}>-</button>
     </div>
 
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Value</th>
+        </tr>
+      </thead>
+      <tbody>
+        {history.map(entry => <tr key={entry.id}>
+          <td>{entry.opName}</td>
+          <td>{entry.opValue}</td>
+        </tr>)}
+      </tbody>
+    </table>
+
   </form>
 
 };
@@ -74,6 +91,7 @@ const subtract = num => calcToolStore.dispatch(createSubtractAction(num));
 calcToolStore.subscribe(() => {
   ReactDOM.render(
     <CalcTool result={calcToolStore.getState().result}
+      history={calcToolStore.getState().history}
       onAdd={add} onSubtract={subtract} />,
     document.querySelector('#root'),
   );
