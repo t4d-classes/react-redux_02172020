@@ -1,21 +1,45 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+const ADD_ACTION = '[CalcTool] ADD';
+const SUBTRACT_ACTION = '[CalcTool] SUBTRACT';
 
-import { ColorTool } from './components/ColorTool';
-import { CarTool } from './components/CarTool';
+const createAddAction = num => ({ type: ADD_ACTION, payload: { num }});
+const createSubtractAction = num => ({ type: SUBTRACT_ACTION, payload: { num }});
 
-const colorList = ['blue','red','black','green','orange','white'];
+const calcToolReducer = (state = { result: 0 }, action) => {
+  console.log('state: ', state, 'action: ', action);
+  switch(action.type) {
+    case ADD_ACTION:
+      return {
+        ...state,
+        result: state.result + action.payload.num,
+      };
+    case SUBTRACT_ACTION:
+      return {
+        ...state,
+        result: state.result - action.payload.num,
+      };
+    default:
+      return state;
+  }
+};
 
-const carList = [
-  { id: 1, make: 'Ford', model: 'Fusion Hybrid', year: 2020, color: 'red', price: 30000 },
-  { id: 2, make: 'Tesla', model: 'S', year: 2019, color: 'blue', price: 100000 },
-];
+const createStore = (reducerFn) => {
 
+  return {
+    getState: () => {},
+    subscribe: () => {},
+    dispatch: () => {},
+  };
 
-ReactDOM.render(
-  <>
-    <ColorTool colors={colorList} />
-    <CarTool cars={carList} />
-  </>,
-  document.querySelector('#root'),
-);
+};
+
+// const actions = [
+//   createAddAction(1),
+//   createSubtractAction(2),
+//   { type: ADD_ACTION, payload: { num: 3 } },
+//   { type: SUBTRACT_ACTION, payload: { num: 4 } },
+//   { type: ADD_ACTION, payload: { num: 5 } },
+// ];
+
+// const finalState = actions.reduce( , { result: 0 } );
+
+// console.log(finalState);
