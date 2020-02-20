@@ -1,3 +1,4 @@
+import { combineReducers } from 'redux';
 import {
   APPEND_CAR, REPLACE_CAR, DELETE_CAR,
   EDIT_CAR, CANCEL_CAR, TOGGLE_CAR,
@@ -74,21 +75,54 @@ const selectedCarIdsReducer = (selectedCarIds = [], action, carIds) => {
 
 };
 
-const sortColReducer = (sortCol = '', action) => {
+const sortColReducer = (colName = '', action) => {
 
   if (action.type === SORT_COL) {
-    return action.payload.sortCol;
+    return action.payload.colName;
   }
 
-  return sortCol;
+  return colName;
 
 };
 
+const someReducers = combineReducers({
+  editCarId: editCarIdReducer,
+  sortCol: sortColReducer
+});
+
 export const carToolReducer = (state = {}, action) => {
+
+  const newState = someReducers({
+    editCarId: state.editCarId,
+    sortCol: state.sortCol,
+  }, action);
+
   return {
+    ...newState,
     cars: carsReducer(state.cars, action, state.selectedCarIds ? state.selectedCarIds : []),
-    editCarId: editCarIdReducer(state.editCarId, action),
     selectedCarIds: selectedCarIdsReducer(state.selectedCarIds, action, state.cars ? state.cars.map(c => c.id) : []),
-    sortCol: sortColReducer(state.sortCol, action),
   };
+
+  // return {
+  //   cars: carsReducer(state.cars, action, state.selectedCarIds ? state.selectedCarIds : []),
+  //   editCarId: editCarIdReducer(state.editCarId, action),
+  //   selectedCarIds: selectedCarIdsReducer(state.selectedCarIds, action, state.cars ? state.cars.map(c => c.id) : []),
+  //   sortCol: sortColReducer(state.sortCol, action),
+  // };
 }
+
+// export const deltaReducer = (state = {}, action) => {
+
+//   // return {
+//   //   buyATicket: buyATicketFeatureReducer(state.buyATicket, action),
+//   //   checkIn: checkInFeatureReducer(state.checkIn, action),
+//   //   skyMiles: skyMilesFeatureReducer(state.skyMiles, action),
+//   // };
+
+//   return combineReducers({
+//     buyATicket: buyATicketFeatureReducer,
+//     checkIn: checkInFeatureReducer,
+//     skyMiles: skyMilesFeatureReducer,
+//   })
+
+// };

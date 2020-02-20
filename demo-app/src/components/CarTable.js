@@ -40,7 +40,7 @@ export const CarTable = ({
           <tr>
             <th>Select</th>
             {config.cols.map(col =>
-              <SortColHeader colName={col.name} onSort={sort}
+              <SortColHeader key={col.id} colName={col.name} onSort={sort}
                 sortCol={sortCol} headerText={col.header} />)}
             <th>Actions</th>
           </tr>
