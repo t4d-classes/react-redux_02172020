@@ -39,5 +39,43 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+
+    <script>
+
+      // setTimeout(() => {
+      //     console.log('a');
+      //     setTimeout(() => {
+      //         console.log('b');
+      //         setTimeout(() => {
+      //             console.log('c');
+      //         }, 100);
+      //     }, 500);
+      // }, 1000);
+
+      function allDone() {
+        console.log('all done');
+      }
+
+      setTimeout(() => {
+        console.log('a');
+      }, 2000);
+
+      setTimeout(() => {
+        console.log('b');
+      }, 500);
+
+      setTimeout(() => {
+        console.log('c');
+      }, 1000);
+
+      // Modify the above code to run the allDone function after all three setTimeout callbacks have fired off
+      // Rules:
+      // 1. All three setTimeouts must be called in the same task
+      // 2. You cannot change the delay values, and you cannot write code which uses delay to wait out the delay - remember the delay values should be considered random
+      
+
+
+
+    </script>
   </body>
 </html>
