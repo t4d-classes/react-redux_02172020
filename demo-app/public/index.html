@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
+    <!-- <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
@@ -9,12 +9,12 @@
       name="description"
       content="Web site created using create-react-app"
     />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" /> -->
     <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
     -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <!-- <link rel="manifest" href="%PUBLIC_URL%/manifest.json" /> -->
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
@@ -40,6 +40,7 @@
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
 
+    <button type="button">Do It!</button>
     <script>
 
       // setTimeout(() => {
@@ -52,26 +53,120 @@
       //     }, 500);
       // }, 1000);
 
-      function allDone() {
-        console.log('all done');
-      }
+      // function allDone() {
+      //   console.log('all done');
+      // }
 
-      setTimeout(() => {
-        console.log('a');
-      }, 2000);
+      // let counter = 0;
 
-      setTimeout(() => {
-        console.log('b');
-      }, 500);
+      // counter++;
+      // setTimeout(() => {
+      //   console.log('a');
 
-      setTimeout(() => {
-        console.log('c');
-      }, 1000);
+      //   counter--;
+      //   if (counter === 0) {
+      //     allDone();
+      //   }
+      // }, 700);
+
+      // counter++;
+      // setTimeout(() => {
+      //   console.log('b');
+      //   counter--;
+      //   if (counter === 0) {
+      //     allDone();
+      //   }
+      // }, 500);
+
+      // counter++;
+      // setTimeout(() => {
+      //   console.log('c');
+      //   counter--;
+      //   if (counter === 0) {
+      //     allDone();
+      //   }
+      // }, 1000);
 
       // Modify the above code to run the allDone function after all three setTimeout callbacks have fired off
       // Rules:
       // 1. All three setTimeouts must be called in the same task
       // 2. You cannot change the delay values, and you cannot write code which uses delay to wait out the delay - remember the delay values should be considered random
+
+      // var con = new DataConn();
+
+      // con.open(function(con) {
+      //   con.query("select ...", function(rst) {
+      //     rst.data
+      //   });
+
+      
+      // });
+
+      // document.querySelector('button').addEventListener('click', () => {
+
+        // const youngMan = new Promise(function youngLady(resolve, reject) {
+
+        //   setTimeout(function youngLadyDecision() {
+        //     console.log('she says yes to the dress but with someone else...');
+        //     // resolve('he is a programmer...');
+        //     reject('she fell in love with his best friend...');
+        //   }, 2000);
+
+        // });
+
+        // youngMan
+        //   .then(function youngManResolve(result) {
+        //     console.log(result);
+        //     console.log('yay! she said yes!');
+        //   })
+        //   .catch(function(result) {
+        //     console.log(result);
+        //     console.log('she said no, time to sign up with eHarmony to find a more compatible match...')
+        //   });
+
+        // console.log('young man is waiting...');
+      
+      
+        // });
+
+
+        const xhr = new XMLHttpRequest();
+
+        xhr.addEventListener('readystatechange', () => {
+
+          if (xhr.status === 200 && xhr.readyState === 4) {
+            console.log(JSON.parse(xhr.responseText));
+          }
+
+        });
+
+        xhr.open('GET', 'http://localhost:3050/cars');
+        xhr.send();
+
+
+        // using the above code, please implement the following API
+        // you are implementing the function myFetch
+        // it should work as demonstrated below:
+
+        myFetch('http://localhost:3050/cars')
+          .then(cars => console.log(cars));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       
 
 
