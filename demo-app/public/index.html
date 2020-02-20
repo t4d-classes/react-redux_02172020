@@ -104,12 +104,69 @@
 
       // document.querySelector('button').addEventListener('click', () => {
 
+        const proposeMarriage = () => {
+          console.log('propose marriage...');
+          return new Promise(function youngLady(resolve, reject) {
+            setTimeout(function youngLadyDecision() {
+              console.log('she says yes to the dress...');
+              resolve('she is madly in love with the young man...');
+              // reject('she fell in love with his best friend...');
+            }, 2000);
+          });
+        };
+
+        const findClothes = () => {
+          console.log('find some wedding clothes...');
+          return new Promise(resolve => {
+            setTimeout(() => {
+              resolve('found some clothes to wear');
+            }, 2000);
+          });
+        };
+
+        const findLocation = () => {
+          console.log('find a location...');
+            return new Promise(resolve => {
+              setTimeout(() => {
+                resolve('found a location to tie the knot...')
+              }, 2000);
+            });
+        }
+
+
+        async function tyingTheKnot() {
+          let result = await proposeMarriage();
+          console.log(result);
+
+          result = await findClothes();
+          console.log(result);
+
+          result = await findLocation();
+          console.log(result);
+        }
+
+        tyingTheKnot();
+
+        // proposeMarriage()
+        //   .then(result => {
+        //     console.log(result);
+        //     return findClothes();
+        //   })
+        //   .then(result => {
+        //     console.log(result);
+        //     return findLocation();
+        //   })
+        //   .then(result => {
+        //     console.log(result);
+        //   })
+
+
         // const youngMan = new Promise(function youngLady(resolve, reject) {
 
         //   setTimeout(function youngLadyDecision() {
-        //     console.log('she says yes to the dress but with someone else...');
-        //     // resolve('he is a programmer...');
-        //     reject('she fell in love with his best friend...');
+        //     console.log('she says yes to the dress...');
+        //     resolve('she is madly in love with the young man...');
+        //     // reject('she fell in love with his best friend...');
         //   }, 2000);
 
         // });
@@ -118,6 +175,28 @@
         //   .then(function youngManResolve(result) {
         //     console.log(result);
         //     console.log('yay! she said yes!');
+
+        //     console.log('find some wedding clothes...');
+        //     return new Promise(resolve => {
+        //       setTimeout(() => {
+        //         resolve('found some clothes to wear');
+        //       }, 2000);
+        //     });
+
+        //   })
+        //   .then((result) => {
+        //     console.log(result);
+
+        //     console.log('find a location...');
+        //     return new Promise(resolve => {
+        //       setTimeout(() => {
+        //         resolve('found a location to tie the knot...')
+        //       }, 2000);
+        //     });
+
+        //   })
+        //   .then(result => {
+        //     console.log(result);
         //   })
         //   .catch(function(result) {
         //     console.log(result);
@@ -130,26 +209,42 @@
         // });
 
 
-        const xhr = new XMLHttpRequest();
+        // const myFetch = (url) => {
+        //   return new Promise((resolve) => {
+        //     const xhr = new XMLHttpRequest();
+        //     xhr.addEventListener('readystatechange', () => {
+        //       if (xhr.status === 200 && xhr.readyState === 4) {
+        //         resolve(JSON.parse(xhr.responseText));
+        //       }
+        //     });
+        //     xhr.open('GET', url);
+        //     xhr.send();
+        //   });
+        // };
 
-        xhr.addEventListener('readystatechange', () => {
-
-          if (xhr.status === 200 && xhr.readyState === 4) {
-            console.log(JSON.parse(xhr.responseText));
-          }
-
-        });
-
-        xhr.open('GET', 'http://localhost:3050/cars');
-        xhr.send();
 
 
         // using the above code, please implement the following API
         // you are implementing the function myFetch
         // it should work as demonstrated below:
 
-        myFetch('http://localhost:3050/cars')
-          .then(cars => console.log(cars));
+        // myFetch('http://localhost:3050/cars').then(cars => console.log(cars));
+
+
+        // const p1 = new Promise(resolve => setTimeout(() => resolve('a'), 2000));
+        // const p2 = new Promise(resolve => setTimeout(() => resolve('b'), 4000));
+        // const p3 = new Promise(resolve => setTimeout(() => resolve('c'), 6000));
+        // const p4 = new Promise(resolve => setTimeout(() => resolve('d'), 8000));
+
+        // p1.then(result => console.log(result));
+        // p2.then(result => console.log(result));
+        // p3.then(result => console.log(result));
+        // p4.then(result => console.log(result));
+
+        // Promise.all([p1,p2,p3,p4]).then(function finsihed(results) {
+        //   console.log(results);
+        //   console.log('all done');
+        // });
 
 
 

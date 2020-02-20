@@ -2,18 +2,16 @@ import { combineReducers } from 'redux';
 import {
   APPEND_CAR, REPLACE_CAR, DELETE_CAR,
   EDIT_CAR, CANCEL_CAR, TOGGLE_CAR,
-  TOGGLE_ALL_CARS, SORT_COL, BULK_DELETE_CARS
+  TOGGLE_ALL_CARS, SORT_COL, BULK_DELETE_CARS,
+  REFRESH_CARS_DONE,
 }
 from '../actions/car-tool-actions';
 
-const initCars = [
-  { id: 1, make: 'Ford', model: 'Fusion Hybrid', year: 2020, color: 'red', price: 30000 },
-  { id: 2, make: 'Tesla', model: 'S', year: 2019, color: 'blue', price: 100000 },
-];
-
-const carsReducer = (cars = initCars, action, selectedCarIds) => {
+const carsReducer = (cars = [], action, selectedCarIds) => {
 
   switch (action.type) {
+    case REFRESH_CARS_DONE:
+      return action.payload.cars;
     case APPEND_CAR:
       return cars.concat({
         ...action.payload.car,

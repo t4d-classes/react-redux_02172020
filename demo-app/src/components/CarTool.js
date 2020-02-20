@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { ToolHeader } from './ToolHeader';
 import { CarTable } from './CarTable';
@@ -10,7 +10,14 @@ export const CarTool = ({
   onAppendCar, onReplaceCar, onDeleteCar,
   onEditCar, onCancelCar, onSortCol,
   onToggleCar, onToggleAllCars, onBulkDeleteCars,
+  onRefreshCars,
 }) => {
+
+  useEffect(() => {
+
+    onRefreshCars();
+
+  }, []);
 
   const tableConfig = {
     cols: [

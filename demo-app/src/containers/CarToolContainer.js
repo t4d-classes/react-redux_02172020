@@ -6,6 +6,7 @@ import {
   createAppendCarAction, createReplaceCarAction, createDeleteCarAction,
   createEditCarAction, createCancelCarAction, createSortColAction,
   createToggleCarAction, createToggleAllCarsAction, createBulkDeleteCarsAction,
+  refreshCars,
 } from '../actions/car-tool-actions';
 import { CarTool } from '../components/CarTool';
 
@@ -21,6 +22,7 @@ export const CarToolContainer = () => {
     onToggleCar: createToggleCarAction,
     onToggleAllCars: createToggleAllCarsAction,
     onBulkDeleteCars: createBulkDeleteCarsAction,
+    onRefreshCars: refreshCars,
   }, useDispatch());
 
   const stateProps = useSelector(state => state);
