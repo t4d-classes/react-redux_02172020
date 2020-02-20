@@ -2,11 +2,11 @@
 
 - Choose your own adventure...
 
-1. Upgrade Car Tool to use Redux
+1. Upgrade Car Tool to use Redux. Ensure it works!
 
 - or -
 
-2. Upgrade Color Tool to use Redux
+2. Upgrade Color Tool to use Redux. Ensure it works!
 
 - or - 
 
