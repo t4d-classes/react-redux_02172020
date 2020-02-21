@@ -26,7 +26,9 @@ export const CarToolContainer = () => {
 
   const dispatch = useDispatch();
 
-  const boundActionsProps = useCallback(mapDispatchToProps(dispatch), [ dispatch ]);
+  const boundActionsProps = useCallback(
+    mapDispatchToProps(dispatch), [ dispatch ],
+  );
 
   const dataProps = useSelector(state => ({
     cars: state.cars,

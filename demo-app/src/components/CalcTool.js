@@ -41,7 +41,11 @@ export const CalcTool = ({
         {history.map(entry => <tr key={entry.id}>
           <td>{entry.opName}</td>
           <td>{entry.opValue}</td>
-          <td><button type="button" onClick={() => deleteEntry(entry.id)}>X</button></td>
+          <td>
+            <button type="button" onClick={() => deleteEntry(entry.id)}>
+              X
+            </button>
+          </td>
         </tr>)}
       </tbody>
     </table>
