@@ -57,13 +57,13 @@ const selectedCarIdsReducer = (selectedCarIds = [], action, carIds) => {
 
 };
 
-const sortColReducer = (colName = '', action) => {
+const sortColReducer = (sortColName = '', action) => {
 
   if (action.type === SORT_COL) {
-    return action.payload.colName;
+    return action.payload.sortColName;
   }
 
-  return colName;
+  return sortColName;
 
 };
 
@@ -76,6 +76,6 @@ export const carToolReducer = (state = {}, action) => {
       action,
       state.cars ? state.cars.map(c => c.id) : [],
     ),
-    sortCol: sortColReducer(state.sortCol, action),
+    sortColName: sortColReducer(state.sortColName, action),
   };
 };

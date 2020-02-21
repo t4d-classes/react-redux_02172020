@@ -6,16 +6,23 @@ import { CarForm } from './CarForm';
 import { EditCarFormRow } from './EditCarFormRow';
 
 export const CarTool = ({
-  cars, selectedCarIds, editCarId, sortCol,
-  onAppendCar, onReplaceCar, onDeleteCar,
-  onEditCar, onCancelCar, onSortCol,
-  onToggleCar, onToggleAllCars, onBulkDeleteCars,
-  onRefreshCars,
+  cars, selectedCarIds,
+  editCarId, sortColName,
+  onAppendCar: appendCar,
+  onReplaceCar: replaceCar,
+  onDeleteCar: deleteCar,
+  onEditCar: editCar,
+  onCancelCar: cancelCar,
+  onSortCol: sortCol,
+  onToggleCar: toggleCar,
+  onToggleAllCars: toggleAllCars,
+  onBulkDeleteCars: bulkDeleteCars,
+  onRefreshCars: refreshCars,
 }) => {
 
   useEffect(() => {
 
-    onRefreshCars();
+    refreshCars();
 
   }, []);
 
@@ -35,14 +42,14 @@ export const CarTool = ({
       <ToolHeader headerText="Car Tool" />
       <CarTable config={tableConfig}
         cars={cars} selectedCarIds={selectedCarIds}
-        editCarId={editCarId} sortCol={sortCol}
-        onEditCar={onEditCar} onSelectCar={onToggleCar}
-        onDeleteCar={onDeleteCar} onToggleAllCars={onToggleAllCars}
-        onBulkDeleteCars={onBulkDeleteCars} onSaveCar={onReplaceCar}
-        onCancelCar={onCancelCar} 
+        editCarId={editCarId} sortColName={sortColName}
+        onEditCar={editCar} onSelectCar={toggleCar}
+        onDeleteCar={deleteCar} onToggleAllCars={toggleAllCars}
+        onBulkDeleteCars={bulkDeleteCars} onSaveCar={replaceCar}
+        onCancelCar={cancelCar} 
         CarEditRowComponent={EditCarFormRow}
-        onSort={onSortCol} />
-      <CarForm onSubmitCar={onAppendCar} />
+        onSort={sortCol} onRefreshCars={refreshCars} />
+      <CarForm onSubmitCar={appendCar} />
     </>
   );
 

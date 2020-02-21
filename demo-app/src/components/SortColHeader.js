@@ -4,11 +4,11 @@ export const SortColHeader = ({
   headerText,
   colName,
   onSort: sort,
-  sortCol
+  sortColName
 }) => {
 
   return <th onClick={() => sort(colName)}>
-    {headerText} {sortCol === colName && 'v'}
+    {headerText} {sortColName === colName && 'v'}
   </th>;
 
 };

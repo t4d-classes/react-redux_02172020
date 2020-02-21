@@ -136,9 +136,9 @@ export const createCancelCarAction = () => ({
   type: CANCEL_CAR,
 });
 
-export const createSortColAction = (colName) => ({
+export const createSortColAction = (sortColName) => ({
   type: SORT_COL,
-  payload: { colName },
+  payload: { sortColName },
 });
 
 export const createToggleCarAction = carId => ({

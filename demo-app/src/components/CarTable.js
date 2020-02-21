@@ -18,30 +18,34 @@ export const CarTable = ({
   onSaveCar: saveCar,
   onCancelCar: cancelCar,
   onSort: sort,
-  sortCol,
+  sortColName,
+  onRefreshCars: refreshCars,
 }) => {
 
   const TheCarEditRow = CarEditRowComponent || CarEditRow;
 
   const sortedCars = cars.concat().sort((a,b) => {
 
-    return a[sortCol] > b[sortCol] ? 1 : a[sortCol] < b[sortCol] ? -1 : 0;
+    return a[sortColName] > b[sortColName]
+      ? 1 : a[sortColName] < b[sortColName] ? -1 : 0;
 
   });
 
   return (
     <>
-      <button type="button" onClick={bulkDeleteCars}>
+      <button type="button" onClick={() => bulkDeleteCars(selectedCarIds)}>
         Bulk Delete</button>
       <button type="button" onClick={toggleAllCars}>
         Toggle All</button>
+      <button type="button" onClick={refreshCars}>
+        Refresh Cars</button>
       <table>
         <thead>
           <tr>
             <th>Select</th>
             {config.cols.map(col =>
               <SortColHeader key={col.id} colName={col.name} onSort={sort}
-                sortCol={sortCol} headerText={col.header} />)}
+                sortColName={sortColName} headerText={col.header} />)}
             <th>Actions</th>
           </tr>
         </thead>

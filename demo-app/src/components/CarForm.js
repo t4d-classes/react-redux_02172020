@@ -68,5 +68,3 @@ export const CarForm = ({ onSubmitCar, buttonText, car, onCancelCar: cancelCar }
 CarForm.defaultProps = {
   buttonText: 'Submit Car',
 };
-
-console.dir(CarForm);
