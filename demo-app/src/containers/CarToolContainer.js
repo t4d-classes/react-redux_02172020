@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { bindActionCreators } from 'redux';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -9,22 +9,31 @@ import {
 } from '../actions/car-tool-actions';
 import { CarTool } from '../components/CarTool';
 
+const mapDispatchToProps = dispatch => bindActionCreators({
+  onAppendCar: appendCar,
+  onReplaceCar: replaceCar,
+  onDeleteCar: deleteCar,
+  onEditCar: createEditCarAction,
+  onCancelCar: createCancelCarAction,
+  onSortCol: createSortColAction,
+  onToggleCar: createToggleCarAction,
+  onToggleAllCars: createToggleAllCarsAction,
+  onBulkDeleteCars: bulkDeleteCars,
+  onRefreshCars: refreshCars,
+}, dispatch)
+
 export const CarToolContainer = () => {
 
-  const dispatchProps = bindActionCreators({
-    onAppendCar: appendCar,
-    onReplaceCar: replaceCar,
-    onDeleteCar: deleteCar,
-    onEditCar: createEditCarAction,
-    onCancelCar: createCancelCarAction,
-    onSortCol: createSortColAction,
-    onToggleCar: createToggleCarAction,
-    onToggleAllCars: createToggleAllCarsAction,
-    onBulkDeleteCars: bulkDeleteCars,
-    onRefreshCars: refreshCars,
-  }, useDispatch());
+  const dispatch = useDispatch();
 
-  const stateProps = useSelector(state => state);
+  const boundActionsProps = useCallback(mapDispatchToProps(dispatch), [ dispatch ]);
 
-  return <CarTool {...dispatchProps} {...stateProps} />;
+  const dataProps = useSelector(state => ({
+    cars: state.cars,
+    editCarId: state.editCarId,
+    selectedCarIds: state.selectedCarIds,
+    sortColName: state.sortColName,
+  }));
+
+  return <CarTool {...boundActionsProps} {...dataProps} />;
 };

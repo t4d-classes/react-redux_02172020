@@ -24,7 +24,7 @@ export const CarTool = ({
 
     refreshCars();
 
-  }, []);
+  }, [ refreshCars ]);
 
   const tableConfig = {
     cols: [

@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { bindActionCreators } from 'redux';
 import { useSelector, useDispatch } from 'react-redux';
+import { createSelector } from 'reselect';
 
 import {
   ADD_ACTION, SUBTRACT_ACTION, createAddAction,
@@ -10,6 +11,9 @@ import {
 import { CalcTool } from '../components/CalcTool';
 
 const calcResult = history => {
+
+  console.log('calling calc result');
+
   return history.reduce( (acc, entry) => { 
     switch (entry.opName) {
       case ADD_ACTION:
@@ -22,21 +26,32 @@ const calcResult = history => {
   }, 0);
 };
 
+const mapDispatchToProps = dispatch => bindActionCreators({
+  onAdd: createAddAction,
+  onSubtract: createSubtractAction,
+  onClear: createClearAction,
+  onDleteEntry: createDeleteEntryAction,
+  noop: () => ({ type: 'NOOP' }),
+}, dispatch);
+
+const historySelector = createSelector(
+  state => state.history,
+  (history) => ({
+    result: calcResult(history),
+    history: history,
+  }),
+);
+
 export const CalcToolContainer = () => {
 
-  const { add, subtract, clear, deleteEntry } = bindActionCreators({
-    add: createAddAction,
-    subtract: createSubtractAction,
-    clear: createClearAction,
-    deleteEntry: createDeleteEntryAction,
-  }, useDispatch());
+  const dispatch = useDispatch();
 
-  const stateProps = useSelector(state => ({
-    result: calcResult(state.history),
-    history: state.history,
-  }));
+  const boundActionsProps = useCallback(
+    mapDispatchToProps(dispatch),
+    [dispatch],
+  );
 
-  return <CalcTool {...stateProps}
-    onAdd={add} onSubtract={subtract}
-    onClear={clear} onDeleteEntry={deleteEntry}/>;
+  const dataProps = useSelector(historySelector);
+
+  return <CalcTool {...boundActionsProps} {...dataProps} />;
 };

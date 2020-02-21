@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 
 export const CalcTool = ({
-  result,
-  history,
-  onAdd, onSubtract,
-  onClear, onDeleteEntry }) => {
+  result, history,
+  onAdd: add,
+  onSubtract: subtract,
+  onClear: clear,
+  onDeleteEntry: deleteEntry,
+  noop
+}) => {
 
   const [ num, setNum ] = useState(0);
 
@@ -21,9 +24,10 @@ export const CalcTool = ({
     </div>
 
     <div>
-      <button type="button" onClick={() => onAdd(num)}>+</button>
-      <button type="button" onClick={() => onSubtract(num)}>-</button>
-      <button type="button" onClick={() => onClear()}>Clear</button>
+      <button type="button" onClick={() => add(num)}>+</button>
+      <button type="button" onClick={() => subtract(num)}>-</button>
+      <button type="button" onClick={() => clear()}>Clear</button>
+      <button type="button" onClick={() => noop()}>Noop</button>
     </div>
 
     <table>
@@ -37,7 +41,7 @@ export const CalcTool = ({
         {history.map(entry => <tr key={entry.id}>
           <td>{entry.opName}</td>
           <td>{entry.opValue}</td>
-          <td><button type="button" onClick={() => onDeleteEntry(entry.id)}>X</button></td>
+          <td><button type="button" onClick={() => deleteEntry(entry.id)}>X</button></td>
         </tr>)}
       </tbody>
     </table>
