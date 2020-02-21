@@ -8,7 +8,6 @@ export const ColorTool = (props) => {
 
   const [ colorForm, setColorForm ] = useState({
     colorName: '',
-    colorHexcode: '',
   });
 
   const change = (e) => {
@@ -23,7 +22,6 @@ export const ColorTool = (props) => {
 
     setColorForm({
       colorName: '',
-      colorHexcode: '',
     });
   };
 
@@ -35,13 +33,8 @@ export const ColorTool = (props) => {
       </ul>
       <form>
         <div>
-          {/* React.createElement('label', { htmlFor: 'color-name-input' }, 'Color Name') */}
           <label htmlFor="color-name-input">Color Name</label>
           <input type="text" id="color-name-input" name="colorName" value={colorForm.colorName} onChange={change} />
-        </div>
-        <div>
-          <label htmlFor="color-hexcode-input">Color Hexcode</label>
-          <input type="text" id="color-hexcode-input" name="colorHexcode" value={colorForm.colorHexcode} onChange={change} />
         </div>
         <button type="button" onClick={addColor}>Add Color</button>
       </form>
