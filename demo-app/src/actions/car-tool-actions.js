@@ -1,14 +1,18 @@
 export const REFRESH_CARS_REQUEST = 'REFRESH_CARS_REQUEST';
 export const REFRESH_CARS_DONE = 'REFRESH_CARS_DONE';
-export const APPEND_CAR = 'APPEND_CAR';
-export const REPLACE_CAR = 'REPLACE_CAR';
-export const DELETE_CAR = 'DELETE_CAR';
+export const APPEND_CAR_REQUEST = 'APPEND_CAR_REQUEST';
+export const APPEND_CAR_DONE = 'APPEND_CAR_DONE';
+export const REPLACE_CAR_REQUEST = 'REPLACE_CAR_REQUEST';
+export const REPLACE_CAR_DONE = 'REPLACE_CAR_DONE';
+export const DELETE_CAR_REQUEST = 'DELETE_CAR_REQUEST';
+export const DELETE_CAR_DONE = 'DELETE_CAR_DONE';
 export const EDIT_CAR = 'EDIT_CAR';
 export const CANCEL_CAR = 'CANCEL_CAR';
 export const SORT_COL = 'SORT_COL';
 export const TOGGLE_CAR = 'TOGGLE_CAR';
 export const TOGGLE_ALL_CARS = 'TOGGLE_ALL_CARS';
-export const BULK_DELETE_CARS = 'BULK_DELETE_CARS';
+export const BULK_DELETE_CARS_REQUEST = 'BULK_DELETE_CARS_REQUEST';
+export const BULK_DELETE_CARS_DONE = 'BULK_DELETE_CARS_DONE';
 
 export const createRefreshCarsRequestAction = () => ({
   type: REFRESH_CARS_REQUEST,
@@ -19,31 +23,110 @@ export const createRefreshCarsDoneAction = (cars) => ({
 });
 
 export const refreshCars = () => {
-
   return async dispatch => {
-
     dispatch(createRefreshCarsRequestAction());
-
     const res = await fetch('http://localhost:3050/cars');
     const cars = await res.json();
     dispatch(createRefreshCarsDoneAction(cars));
-
   };
-
 };
 
 
-export const createAppendCarAction = car => ({
-  type: APPEND_CAR, payload: { car },
+export const createAppendCarRequestAction = car => ({
+  type: APPEND_CAR_REQUEST, payload: { car },
 });
 
-export const createReplaceCarAction = car => ({
-  type: REPLACE_CAR, payload: { car },
+export const createAppendCarDoneAction = car => ({
+  type: APPEND_CAR_DONE, payload: { car },
 });
 
-export const createDeleteCarAction = carId => ({
-  type: DELETE_CAR, payload: { carId },
+export const appendCar = (car) => {
+  return async dispatch => {
+    dispatch(createAppendCarRequestAction(car));
+    const res = await fetch('http://localhost:3050/cars', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(car),
+    });
+    const appendedCar = await res.json();
+    dispatch(createAppendCarDoneAction(appendedCar));
+    dispatch(refreshCars());
+  };
+};
+
+
+export const createReplaceCarRequestAction = car => ({
+  type: REPLACE_CAR_REQUEST, payload: { car },
 });
+
+export const createReplaceCarDoneAction = car => ({
+  type: REPLACE_CAR_DONE, payload: { car },
+});
+
+export const replaceCar = (car) => {
+  return async dispatch => {
+    dispatch(createReplaceCarRequestAction(car));
+    const res = await fetch(
+      'http://localhost:3050/cars/' + encodeURIComponent(car.id),
+      {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(car),
+      },
+    );
+    const replacedCar = await res.json();
+    dispatch(createReplaceCarDoneAction(replacedCar));
+    dispatch(refreshCars());
+  };
+};
+
+
+export const createDeleteCarRequestAction = carId => ({
+  type: DELETE_CAR_REQUEST, payload: { carId },
+});
+
+export const createDeleteCarDoneAction = carId => ({
+  type: DELETE_CAR_DONE, payload: { carId },
+});
+
+export const deleteCar = (carId) => {
+  return async dispatch => {
+    dispatch(createDeleteCarRequestAction(carId));
+    await fetch(
+      'http://localhost:3050/cars/' + encodeURIComponent(carId),
+      {
+        method: 'DELETE',
+      },
+    );
+    dispatch(createDeleteCarDoneAction(carId));
+    dispatch(refreshCars());
+  };
+};
+
+
+export const createBulkDeleteCarsRequestAction = (carIds) => ({
+  type: BULK_DELETE_CARS_REQUEST, payload: { carIds },
+});
+
+export const createBulkDeleteCarsDoneAction = (carIds) => ({
+  type: BULK_DELETE_CARS_DONE, payload: { carIds },
+});
+
+export const bulkDeleteCars = (carIds) => {
+  return async dispatch => {
+    dispatch(createBulkDeleteCarsRequestAction(carIds));
+
+    await Promise.all(carIds.map(carId => fetch(
+      'http://localhost:3050/cars/' + encodeURIComponent(carId),
+      { method: 'DELETE' },
+    )));
+
+    dispatch(createBulkDeleteCarsDoneAction(carIds));
+    dispatch(refreshCars());
+  };
+};
+
+
 
 export const createEditCarAction = carId => ({
   type: EDIT_CAR, payload: { carId },
@@ -64,8 +147,4 @@ export const createToggleCarAction = carId => ({
 
 export const createToggleAllCarsAction = () => ({
   type: TOGGLE_ALL_CARS,
-});
-
-export const createBulkDeleteCarsAction = () => ({
-  type: BULK_DELETE_CARS,
 });

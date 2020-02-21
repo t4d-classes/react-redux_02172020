@@ -3,25 +3,24 @@ import { bindActionCreators } from 'redux';
 import { useSelector, useDispatch } from 'react-redux';
 
 import {
-  createAppendCarAction, createReplaceCarAction, createDeleteCarAction,
+  refreshCars, appendCar, replaceCar, deleteCar, bulkDeleteCars,
   createEditCarAction, createCancelCarAction, createSortColAction,
-  createToggleCarAction, createToggleAllCarsAction, createBulkDeleteCarsAction,
-  refreshCars,
+  createToggleCarAction, createToggleAllCarsAction,
 } from '../actions/car-tool-actions';
 import { CarTool } from '../components/CarTool';
 
 export const CarToolContainer = () => {
 
   const dispatchProps = bindActionCreators({
-    onAppendCar: createAppendCarAction,
-    onReplaceCar: createReplaceCarAction,
-    onDeleteCar: createDeleteCarAction,
+    onAppendCar: appendCar,
+    onReplaceCar: replaceCar,
+    onDeleteCar: deleteCar,
     onEditCar: createEditCarAction,
     onCancelCar: createCancelCarAction,
     onSortCol: createSortColAction,
     onToggleCar: createToggleCarAction,
     onToggleAllCars: createToggleAllCarsAction,
-    onBulkDeleteCars: createBulkDeleteCarsAction,
+    onBulkDeleteCars: bulkDeleteCars,
     onRefreshCars: refreshCars,
   }, useDispatch());
 
