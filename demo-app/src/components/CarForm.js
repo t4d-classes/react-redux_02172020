@@ -65,6 +65,8 @@ export const CarForm = ({ onSubmitCar, buttonText, car, onCancelCar: cancelCar }
   );
 };
 
+// default props specify default values for props which
+// are not passed to the component
 CarForm.defaultProps = {
   buttonText: 'Submit Car',
 };

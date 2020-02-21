@@ -19,11 +19,17 @@ export const CarEditRow = ({
   const saveCar = () => {
 
     onSaveCar({
+      // the spread works here because the property names of the carForm object are the
+      // same property names as car object
       ...carForm,
       id: car.id
     });
 
   };
+
+  // for the above change handler to work, the carForm property name (such as 'make')
+  // needs to match the property name used in the input's 'value' attribute and the
+  // input's 'name' attribute
 
   return (
     <tr>

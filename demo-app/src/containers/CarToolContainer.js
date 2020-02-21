@@ -9,6 +9,7 @@ import {
 } from '../actions/car-tool-actions';
 import { CarTool } from '../components/CarTool';
 
+// produces an object of dispatch-bound actions
 const mapDispatchToProps = dispatch => bindActionCreators({
   onAppendCar: appendCar,
   onReplaceCar: replaceCar,
@@ -26,10 +27,14 @@ export const CarToolContainer = () => {
 
   const dispatch = useDispatch();
 
+  // only produce a new object of bound actions if the dispatch
+  // function reference changes (which it should never do)
   const boundActionsProps = useCallback(
     mapDispatchToProps(dispatch), [ dispatch ],
   );
 
+  // select the data props from the state which will be passed into
+  // component
   const dataProps = useSelector(state => ({
     cars: state.cars,
     editCarId: state.editCarId,
@@ -37,5 +42,6 @@ export const CarToolContainer = () => {
     sortColName: state.sortColName,
   }));
 
+  // using a JSX spread, pass the bound actions and data
   return <CarTool {...boundActionsProps} {...dataProps} />;
 };
