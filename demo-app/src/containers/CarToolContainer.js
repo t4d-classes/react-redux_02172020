@@ -27,8 +27,8 @@ export const CarToolContainer = () => {
 
   const dispatch = useDispatch();
 
-  // only produce a new object of bound actions if the dispatch
-  // function reference changes (which it should never do)
+  // // only produce a new object of bound actions if the dispatch
+  // // function reference changes (which it should never do)
   const boundActionsProps = useCallback(
     mapDispatchToProps(dispatch), [ dispatch ],
   );

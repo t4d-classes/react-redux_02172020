@@ -30,7 +30,7 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   onAdd: createAddAction,
   onSubtract: createSubtractAction,
   onClear: createClearAction,
-  onDleteEntry: createDeleteEntryAction,
+  onDeleteEntry: createDeleteEntryAction,
   noop: () => ({ type: 'NOOP' }),
 }, dispatch);
 

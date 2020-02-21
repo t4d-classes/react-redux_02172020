@@ -43,7 +43,7 @@ export const refreshCars = () => {
   // when the thunk middleware invokes this funtion it will pass
   // the store's dispatch function which will be used to dispatch
   // the appropriate request and done actions
-  return async dispatch => {
+  return async (dispatch) => {
     dispatch(createRefreshCarsRequestAction());
 
     // using async/await enables easier to read code
@@ -74,7 +74,12 @@ export const appendCar = (car) => {
     });
     const appendedCar = await res.json();
     dispatch(createAppendCarDoneAction(appendedCar));
-    dispatch(refreshCars());
+    // dispatch(refreshCars());
+
+    const fn = refreshCars();
+    // fn(dispatch);
+
+    dispatch(fn);
   };
 };
 
@@ -137,7 +142,8 @@ export const createBulkDeleteCarsDoneAction = (carIds) => ({
 });
 
 export const bulkDeleteCars = (carIds) => {
-  return async dispatch => {
+  return async (dispatch) => {
+
     dispatch(createBulkDeleteCarsRequestAction(carIds));
 
     // even though we are in an async/await function, functions

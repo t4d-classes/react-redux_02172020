@@ -1,8 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { CarViewRow } from './CarViewRow';
 import { CarEditRow } from './CarEditRow';
 import { SortColHeader } from './SortColHeader';
+import { carsPropType } from '../propTypes/cars';
 
 export const CarTable = ({
   config,
@@ -62,4 +64,13 @@ export const CarTable = ({
     </>
   );
 
+};
+
+CarTable.defaultProps = {
+  editCarId: -1,
+};
+
+CarTable.propTypes = {
+  cars: carsPropType,
+  editCarId: PropTypes.number.isRequired,
 };
