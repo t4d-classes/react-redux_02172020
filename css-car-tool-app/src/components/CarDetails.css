@@ -1,0 +1,8 @@
+.CarDetails h2 {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.CarDetails li {
+  padding: 4px;
+} 

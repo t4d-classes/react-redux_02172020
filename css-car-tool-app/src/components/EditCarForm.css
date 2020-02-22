@@ -1,0 +1,27 @@
+.EditCarForm h3 {
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin: 10px 0;
+}
+.EditCarForm .container {
+  display: flex;
+}
+
+.EditCarForm .container > div > div {
+  margin: 6px;
+}
+
+.EditCarForm .container label {
+  display: inline-block;
+}
+
+.EditCarForm .container > div:nth-child(1) label {
+  width: 75px;
+}
+.EditCarForm .container > div:nth-child(2) label {
+  width: 125px;
+}
+
+.EditCarForm .Button {
+  margin: 5px;
+}

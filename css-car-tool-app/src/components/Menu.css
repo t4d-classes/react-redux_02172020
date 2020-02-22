@@ -1,0 +1,41 @@
+.Menu {
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.Menu ul {
+  height: inherit;
+  box-sizing: inherit;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  background-color: var(--menu-bg-color);
+}
+
+.Menu li {
+  height: inherit;
+  box-sizing: inherit;
+  display:block;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.Menu a,
+.Menu a:visited {
+  height: inherit;
+  box-sizing: inherit;
+  font-size: 0.9rem;
+  text-decoration: none;
+  color: var(--menu-text-color);
+  padding: 4px;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Menu a:hover {
+  color:var(--menu-text-color);
+  background-color: var(--menu-bg-hover-color);
+}

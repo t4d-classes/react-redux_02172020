@@ -1,5 +1,7 @@
 import React from 'react';
 
+import './ToolHeader.css';
+
 // - the first parameter of a component is referred to as props
 // and it contains all of the values passed in as attributes
 // to the component
@@ -8,6 +10,6 @@ import React from 'react';
 export const ToolHeader = (props) => {
 
   return <header>
-    <h1>{props.headerText}</h1>
+    <h1 className="page-header" style={{ fontStyle: 'italic' }}>{props.headerText}</h1>
   </header>;
 };

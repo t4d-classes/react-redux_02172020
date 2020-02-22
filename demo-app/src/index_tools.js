@@ -19,3 +19,29 @@ ReactDOM.render(
   </>,
   document.querySelector('#root'),
 );
+
+class Person {
+
+  constructor(firstName, lastName) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+  }
+
+  getFullName() {
+    return this.firstName + this.lastName;
+  }
+
+}
+
+function Person2(firstName, lastName) {
+  this.firstName = firstName;
+  this.lastName = lastName;
+}
+
+Person2.prototype.getFullName = function() {
+  return this.firstName + this.lastName;
+}
+
+
+console.dir(Person);
+console.dir(Person2);

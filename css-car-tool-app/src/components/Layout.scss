@@ -1,0 +1,53 @@
+
+%content-top-margin {
+  margin: 10px;
+}
+
+@mixin col-span($span) {
+  grid-column: span $span;
+}
+
+/* Standard CSS Comment */
+// SASS also support double slash one line comment
+$slots: 12;
+$left-content-slots: 8; 
+
+.Layout {
+  display: grid;
+  grid-template-rows: 4.1rem 1.8rem 1fr 1rem;
+  grid-template-columns: ($left-content-slots / $slots) * 100% (($slots - $left-content-slots) / $slots) * 100%;
+  grid-template-areas:
+    'header header'
+    'menu menu'
+    'left-content right-content'
+    'footer footer';
+
+  .ToolHeader {
+    grid-area: header;
+  }
+
+  .Menu {
+    grid-area: menu;
+  }
+
+  .ToolFooter {
+    grid-area: footer;
+  }
+
+  .CarTable {
+    grid-area: left-content;
+  }
+  
+  .Message, .CarDetails {
+    grid-area: right-content;
+  }
+
+  .Home, .Privacy, .TermsOfUse {
+    @include col-span(2);
+  }
+  
+  .Home, .CarTable, .Message, .CarDetails,
+  .Privacy, .TermsOfUse, .CarForm {
+    @extend %content-top-margin;
+  }
+}

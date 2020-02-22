@@ -1,0 +1,84 @@
+.CarTable table {
+  font-size:1rem;
+  border: 2px solid var(--table-border-color);
+  width: 100%;
+}
+
+.CarTable thead > tr {
+  background-color: var(--table-header-row-bg-color);
+}
+
+.CarTable tbody > tr:nth-child(2n) {
+  background-color: var(--table-row-alt-bg-color);
+}
+
+.CarTable tbody > tr:hover:not(.editRow) {
+  background-color: var(--table-row-hover-bg-color);
+}
+
+.CarTable tbody > tr:hover:not(.editRow) td {
+  color: var(--table-row-hover-text-color);
+}
+
+.CarTable tbody > tr.selected {
+  background-color: var(--table-row-selected-bg-color);
+}
+
+.CarTable > tbody > tr.editRow {
+  color: black;
+  background-color: var(--table-row-alt-bg-color);
+}
+
+.CarTable th {
+  color: var(--table-header-row-text-color);
+  padding:4px;
+  font-weight: bold;
+}
+
+.CarTable td {
+  padding: 4px;
+}
+
+.CarTable .num,
+.CarTable .currency {
+  text-align: right;
+}
+
+.CarTable .text {
+  text-align: left;
+}
+
+.CarTable .option,
+.CarTable .buttons {
+  text-align: center;
+}
+
+.CarTable .buttons button {
+  margin: 4px;
+}
+
+.CarTable .currency::before {
+  content: '$'
+}
+
+.Loading {
+  padding:20px;
+  border:2px solid green;
+  background-color: lightgreen;
+  color: black;
+}
+
+
+.Loading img {
+  animation: Loading-logo-spin infinite 2s linear;
+  height: 40px;
+}
+
+@keyframes Loading-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

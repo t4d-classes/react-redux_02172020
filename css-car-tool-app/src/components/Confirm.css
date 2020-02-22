@@ -1,0 +1,26 @@
+.Confirm {
+  border: 1px solid var(--confirm-border-color);
+  background-color: var(--confirm-bg-color);
+  color: var(--confirm-text-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 10px;
+}
+
+.Confirm .Buttons {
+  padding: 10px;
+  text-align: center;
+}
+
+.Confirm button:nth-child(2) {
+  margin-left: 10px;
+}
+
+.Confirm button {
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  border: 1px solid var(--button-border-color);
+  background-color: var(--button-bg-color);
+  color: var(--button-text-color);
+}

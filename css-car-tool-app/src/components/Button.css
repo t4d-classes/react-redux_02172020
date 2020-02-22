@@ -1,0 +1,13 @@
+.Button {
+  background-color: rgb(211, 211, 211);
+  border: 1px solid hsl(0, 0%, 53%);
+  border-radius: 4px;
+  color: #000;
+  font-size: 0.8rem;
+  outline: none;
+}
+
+.Button:active {
+  font-size: 0.7rem;
+  outline: none;
+}

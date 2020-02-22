@@ -1,0 +1,24 @@
+:root {
+  --text-color: #000;
+  --header-text-color: #FFF;
+  --header-bg-color: #2A59B2;
+  --footer-text-color: #FFF;
+  --footer-bg-color: #88B22C;
+  --menu-text-color: #FFF;
+  --menu-bg-color: #FF4C2C;
+  --menu-bg-hover-color: color(#FF4C2C shade(30%));
+  --table-header-row-bg-color: #568FFF;
+  --table-border-color: #568FFF;
+  --table-header-row-text-color: #FFF;
+  --table-row-alt-bg-color: color(#9BCC30 tint(50%));
+  --table-row-hover-bg-color: color(#FF4C2C tint(0%));
+  --table-row-hover-text-color: #FFF;
+  --table-row-selected-bg-color: color(#FF4C2C tint(50%));
+  --confirm-border-color: #2A59B2;
+  --confirm-bg-color: #568FFF;
+  --confirm-text-color: #FFF;
+  --button-border-color: #FF4C2C;
+  --button-bg-color: #88B22C;
+  --button-text-color: #FFF;
+  --modal-bg-color: color(slategray a(50%));
+}

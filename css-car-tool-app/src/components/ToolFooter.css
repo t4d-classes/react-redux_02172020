@@ -1,0 +1,33 @@
+.ToolFooter {
+  background-color: var(--footer-bg-color);
+  color: var(--footer-text-color);
+  font-size: 0.7rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4px 0;
+  height: 100%;
+}
+
+.ToolFooter > :first-child::after {
+  content: '-';
+  margin: 0 6px;
+}
+
+.ToolFooter ul {
+  display: flex;
+}
+
+.ToolFooter li:not(:last-child) {
+  padding-right: 6px;
+}
+
+.ToolFooter a,
+.ToolFooter a:visited {
+  color: var(--footer-text-color);
+  text-decoration: none;
+}
+
+.ToolFooter a:hover {
+  text-decoration: underline;
+}

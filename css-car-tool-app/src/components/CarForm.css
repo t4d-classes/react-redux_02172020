@@ -1,0 +1,14 @@
+.CarForm h2 {
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.CarForm > div {
+  display: flex;
+  margin-bottom: 4px;
+}
+
+.CarForm > div > label {
+  width: 150px;
+}

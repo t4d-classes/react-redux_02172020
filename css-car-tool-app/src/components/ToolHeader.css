@@ -1,0 +1,15 @@
+.ToolHeader {
+  display: flex;
+  align-items: center;
+  background-color: var(--header-bg-color);
+}
+
+.ToolHeader img {
+  height: 4rem;
+}
+
+.ToolHeader h1 {
+  color:var(--header-text-color);
+  font-weight: bold;
+  font-size: 2rem;
+}
