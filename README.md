@@ -40,6 +40,12 @@ Breaks:
 - [Redux Saga](https://redux-saga.js.org/)
 - [Redux Router](https://reacttraining.com/react-router/)
 - [Redux Connected Router](https://github.com/supasate/connected-react-router)
+- [CSS Selector References](https://www.w3schools.com/cssref/css_selectors.asp)
+- [CSS Tricks - FlexBox](https://css-tricks.com/snippets/css/a-guide-to-flexbox)
+- [CSS Tricks - Grid](https://css-tricks.com/snippets/css/complete-guide-grid)
+- [CSS Diner Game](https://flukeout.github.io)
+- [Flexbox Froggy Game](https://flexboxfroggy.com/)
+- [Grid Garden Game](https://cssgridgarden.com/)
 
 ### Instructor's Resources
 
